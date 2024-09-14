@@ -1,6 +1,18 @@
+import mongoose from "mongoose";
 import express from "express";
 
 const app = express();
+
+
+
+
+;( async () => {
+    try{
+        mongoose.connect('${process.env.MONGODB_URI}')
+    }catch (error){
+        console.log("Error" , error)
+    }
+})()
 
 
 app.get("/", (req, res) => {
