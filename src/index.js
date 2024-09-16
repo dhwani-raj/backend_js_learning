@@ -1,14 +1,47 @@
-import mongoose from "mongoose";
-import express from "express";
+import dotenv from "dotenv"
+import connectDB from "./db/index.js";
+import {app} from "./app.js"
 
-const app = express();
+dotenv.config()
+
+
+connectDB()
+.then(()=>{
+        app.on("error", (error)=> {
+        console.log("Error: ", error);
+        throw error
+      })
+
+  app.listen(process.env.PORT || 8000, ()=>{
+    console.log("server is listening")
+  })
+
+})
 
 
 
+
+
+
+
+
+
+/*
 
 ;( async () => {
     try{
-        mongoose.connect('${process.env.MONGODB_URI}')
+      await mongoose.connect(`${process.env.MONGODB_URI}/${DB_NAME}`)
+
+      app.on("error", (error)=> {
+        console.log("Error: ", error);
+        throw error
+      })
+
+      app.listen(process.env.PORT, ()=> {
+        console.log(`App is listening on port ${process.env.PORT}`)
+      })
+
+
     }catch (error){
         console.log("Error" , error)
     }
@@ -37,6 +70,8 @@ app.get("/jokes", (req, res) => {
 const port = process.env.PORT || 3000;
 
 
-app.listen(port, ()=> {
-    console.log("Server is listeing");
-})
+// app.listen(port, ()=> {
+//     console.log("Server is listeing");
+// })
+
+*/
